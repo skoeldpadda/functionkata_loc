@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class CSharpLinesOfCodeCounter {
 	
-	// TODO: ÷ffnen, schlieﬂen von Kommentaren nicht innerhalb von Strings
+	// TODO: Opening and closing comments not within strings
 
 	public long linesOfCode(String inputCode) {
 		String codeWithoutBlockComments = removeBlockCommentsFromCodeString(inputCode);	
