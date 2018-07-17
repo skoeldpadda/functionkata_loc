@@ -1,3 +1,4 @@
+package de.cas.cleancode.kata.loc;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,3 +1,4 @@
+package de.cas.cleancode.kata.loc;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
