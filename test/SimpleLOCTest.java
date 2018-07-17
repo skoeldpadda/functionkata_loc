@@ -1,13 +1,15 @@
 import static org.junit.Assert.assertEquals;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class Example1 {
+public class SimpleLOCTest {
 
 	private static String exampleCode1 = "/*\r\n" + 
 			" * C# Program to Perform Bubble Sort\r\n" + 
 			" */\r\n" + 
 			"using System;\r\n" + 
+			"/* one-liner block comment */\r\n" +
 			"class bubblesort\r\n" + 
 			"{\r\n" + 
 			"	static void Main(string[] args)\r\n" + 
@@ -43,9 +45,37 @@ public class Example1 {
 			"	}\r\n" + 
 			"}";
 	
+	private static String exampleCode_BlockCommentEndingInMiddleOfLine = "class test\r\n" + 
+			"{\r\n" + 
+			"	static void Main(string[] args)\r\n" + 
+			"	{\r\n" + 
+			"		/* Block comment\r\n" + 
+			"		* this comment ends in the middle of a line*/ Console.WriteLine(\\\"The Sorted Array :\\\");\r\n" +
+			"		foreach (int aray in a)                         \r\n" + 
+			"			Console.Write(aray + \" \");\r\n" + 
+			"		Console.ReadLine();\r\n" + 
+			"	}\r\n" + 
+			"}";
+	
+	private static CSharpLinesOfCodeCounter locCounter;
+	
+	@BeforeClass
+	public static void setUp() {
+		locCounter = new CSharpLinesOfCodeCounter();
+	}
+	
 	@Test
 	public void bubbleSortLOCShouldBe30() {
-		LOC loc = new LOC();
-		assertEquals(30, loc.linesOfCode(exampleCode1));
+		assertEquals(30, locCounter.linesOfCode(exampleCode1));
+	}
+	
+	@Test
+	public void emptyCodeLOCShouldBe0() {
+		assertEquals(0, locCounter.linesOfCode(""));
+	}
+	
+	@Test
+	public void locOfCodeWithBlockCommentEndingInMiddleOfLineShouldBe10() {
+		assertEquals(10, locCounter.linesOfCode(exampleCode_BlockCommentEndingInMiddleOfLine));
 	}
 }
