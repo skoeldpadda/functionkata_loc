@@ -58,6 +58,20 @@ public class SimpleLOCTest {
 			"	}\r\n" + 
 			"}";
 	
+	private static String exampleCode_CommentsInStrings = "class test\r\n" + 
+			"{\r\n" + 
+			"	static void Main(string[] args)\r\n" + 
+			"	{\r\n" +
+			"		string test1 = \"/* Heres a block comment beginning inside of a string\";\r\n" +
+			"		int testInt = 3;\r\n" +
+			"		int testInt2 = 4;\r\n" +
+			"		string test3 = \"and here the block comment inside of a string ends: */\";\r\n" +
+			"		foreach (int aray in a)                         \r\n" + 
+			"			Console.Write(aray + \" \");\r\n" + 
+			"		Console.ReadLine();\r\n" + 
+			"	}\r\n" + 
+			"}";
+	
 	private static CSharpLinesOfCodeCounter locCounter;
 	
 	@BeforeClass
@@ -78,5 +92,10 @@ public class SimpleLOCTest {
 	@Test
 	public void locOfCodeWithBlockCommentEndingInMiddleOfLineShouldBe10() {
 		assertEquals(10, locCounter.linesOfCode(exampleCode_BlockCommentEndingInMiddleOfLine));
+	}
+	
+	@Test
+	public void locOfCodeWithBlockCommentInsideStringShouldBe13() {
+		assertEquals(13, locCounter.linesOfCode(exampleCode_CommentsInStrings));
 	}
 }

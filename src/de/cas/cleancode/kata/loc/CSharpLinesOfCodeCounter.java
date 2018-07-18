@@ -6,17 +6,21 @@ import java.util.List;
  * Count lines of code in C# code.
  */
 public class CSharpLinesOfCodeCounter {
-	
-	// TODO: Opening and closing comments not within strings
 
 	public long linesOfCode(String inputCode) {
-		String codeWithoutBlockComments = removeBlockCommentsFromCodeString(inputCode);	
-		List<String> linesList = splitCodeIntoLines(codeWithoutBlockComments);
+		String codeString = inputCode;
+		codeString = removeStringConstantsFromCodeString(codeString);
+		codeString = removeBlockCommentsFromCodeString(codeString);
+		List<String> linesList = splitCodeIntoLines(codeString);
 		
 		return linesList.stream() //
 				.map(this::removeLineComment) //
 				.filter(this::isLineEmpty) //
 				.count();		
+	}
+
+	private String removeStringConstantsFromCodeString(String codeWithoutBlockComments) {
+		return codeWithoutBlockComments.replaceAll("\".*\"", "\"\"");
 	}
 
 	private List<String> splitCodeIntoLines(String codeWithoutBlockComments) {
